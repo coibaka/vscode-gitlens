@@ -1221,7 +1221,12 @@ export class GitHubGitProvider implements GitProvider, Disposable {
 								}),
 							},
 						}),
-						upstream: branch.upstream?.name,
+						...(branch.upstream && {
+							upstream: {
+								name: branch.upstream.name,
+								id: getBranchId(repoPath, true, branch.upstream.name),
+							},
+						}),
 					},
 				];
 				refRemoteHeads = [
